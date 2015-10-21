@@ -12,13 +12,13 @@ client.on('end', function(){
 
 // 服务器的响应数据
 client.on('data', function(data){
-	console.log('============= response begin =============\n');
+	console.log('============= Header begin =============\n');
 
 	var response = data.toString();
-	var values = response.split(/\n\r/);
-	console.log(values);
+	var header = response.split(/\r\n\r\n/)[0];
+	console.log(header);
 
-	console.log('============= response end   =============\n');
+	console.log('============= Header end   =============\n');
 })
 
 

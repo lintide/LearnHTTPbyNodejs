@@ -103,5 +103,17 @@ Access-Control-Allow-Credentials: true
 `header` 和文档之间也是以一个回车（CR-LF）为分隔，如果你想用程序来获取 `header` 的内容，也就可以用 `CR-LF` 来截取，类似这样：
 
 ```javascript
-var header = response.split("\r\n")[0]
+var header = response.split("\r\n\r\n")[0]
 ```
+
+## 构造一个 POST 请求
+
+## HTTP 2.0
+
+一个连接，多个并发请求
+
+## Server-sent Events
+
+基于文本协议的服务器发送事件
+
+## WebSocket
