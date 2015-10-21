@@ -108,6 +108,39 @@ var header = response.split("\r\n\r\n")[0]
 
 ## 构造一个 POST 请求
 
+`POST` 方法使得客户端可以向服务端提交数据。所以现在请求不但包含了 `header` 同时也要包含 `body` (内容)。
+
+```javascript
+
+// 打开 Socket 链接
+client.connect({host: 'httpbin.org', port: 80});
+
+var post_body = "hello=world";
+
+client.write("POST /post HTTP/1.1\r\n");
+client.write("Host: httpbin.org\r\n");
+client.write("Accept: */*\r\n");
+client.write("Content-Type: application/x-www-form-urlencoded\r\n");
+client.write("Content-Length: " + post_body.length + "\r\n");
+client.write("\r\n"); // 用空行分隔请求头部(header)和提交的内容(body);
+client.write(post_body);
+
+```
+
+顺便说一下，我们在这里使用了`HTTP/1.1`，没错，就是 `HTTP 1.1` 版本的协议。对于`1.1`版本的请求，一定要牢记在 `header` 必须加上
+
+```
+Host: exmaple.com
+```
+
+对于 `POST` 请求，我们还必须在 `header` 中加上 `Content-Type` 和 `Content-Length` 这两个属性，前者定义提交内容的格式，这里为 `application/x-www-form-urlencoded` ，关于 `POST` 请求格式，后续章节再细聊；后者表示提交内容的文本长度。
+
+好吧，喝杯奶茶，让程序跑起来再说
+
+```
+$ node client/http_post.js
+```
+
 ## HTTP 2.0
 
 一个连接，多个并发请求
