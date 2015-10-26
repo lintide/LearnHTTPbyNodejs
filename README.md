@@ -145,6 +145,46 @@ $ node client/http_post.js
 
 一个连接，多个并发请求
 
+### 搭建 HTTP 2.0 测试服务器的环境
+
+[nghttp2](https://github.com/tatsuhiro-t/nghttp2) 是一个 HTTP 2.0 服务器和客户端的实现，在 OSX 系统下，我采用 `brew` 工具进行安装
+
+```
+$ brew install nghttp2
+```
+
+安装成功后，让 HTTP 2.0 服务器运行起来
+
+```
+$ mkdir http2-server
+$ cd http2-server
+$ echo "hello world" >> index.html
+$ nghttpd -v --no-tls 8080
+```
+
+最后一行运行 HTTP 2.0 服务器，试着发出来第一个 HTTP 2.0 请求吧
+
+```
+$ nghttp http://localhost:8080/index.html
+hello world
+```
+
+到目前为止，一切都相当顺利。
+
+### 万能的 telnet 神器
+
+```
+$ telnet localhost 8080
+Trying ::1...
+Connected to localhost.
+Escape character is '^]'.
+dd
+Connection closed by foreign host.
+```
+
+telnet 顺利地连接上了服务器，紧接着服务器马上返回了字母`d`，我什么都没做干嘛给我返回文本，是不是服务器出啥错了？难道也要我回个`d`，试试吧，输入字母`d`，连接立马断开，试了几次结果都这样。我们在`0.9`到`1.1`学到的所有知识在`2.0`中都派不上用场了？！看来 `telnet` 也并不是万能的。
+
+
 ## Server-sent Events
 
 基于文本协议的服务器发送事件
