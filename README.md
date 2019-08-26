@@ -51,7 +51,7 @@ HTTP 1.0 引入了更多的请求方法（method）和头（header）。
 
 先用 `$ telnet httpbin.org 80` 来看看效果
 
-````
+```
 Trying 54.175.222.246...
 Connected to httpbin.org.
 Escape character is '^]'.
